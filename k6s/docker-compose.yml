@@ -1,0 +1,19 @@
+services:
+  k6:
+    # image: grafana/k6
+    image: grafana/k6:master-with-browser # this has chromium installed
+    volumes:
+      - .:/home/k6
+      #   - "$HOME/.Xauthority:/root/.Xauthority:rw"
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    command: ["run", "ui.js"]
+    ports:
+      - 5665:5665
+    environment:
+      - K6_BROWSER_HEADLESS=false
+      - K6_WEB_DASHBOARD=true
+      - K6_WEB_DASHBOARD_HOST=0.0.0.0
+      - K6_WEB_DASHBOARD_EXPORT=html-report.html
+      # Open web dashboard in default browser
+      - K6_WEB_DASHBOARD_OPEN=true
+      - DISPLAY=$DISPLAY
