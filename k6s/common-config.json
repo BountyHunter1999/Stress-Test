@@ -1,0 +1,10 @@
+{
+  "HOST": "https://demo.filamentphp.com",
+  "REMEMBER_ME": {
+    "toggle": true,
+    "locator": "//*[@id='data.remember']"
+  },
+  "LOGIN_BUTTON": {
+    "locator": "//*[@id='form']/div[2]/div/button"
+  }
+}

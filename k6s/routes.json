@@ -1,0 +1,22 @@
+[
+  {
+    "name": "customers",
+    "locator": "/html/body/div[1]/aside/nav/ul/li[2]/ul/li[3]/a/span",
+    "content": "Customers"
+  },
+  {
+    "name": "posts",
+    "locator": "/html/body/div[1]/aside/nav/ul/li[3]/ul/li[1]/a",
+    "content": "Posts"
+  },
+  {
+    "name": "categories",
+    "locator": "/html/body/div[1]/aside/nav/ul/li[3]/ul/li[1]/a",
+    "content": "Categories"
+  },
+  {
+    "name": "authors",
+    "locator": "/html/body/div[1]/aside/nav/ul/li[3]/ul/li[3]/a",
+    "content": "Authors"
+  }
+]
