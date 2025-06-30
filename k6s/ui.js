@@ -41,7 +41,7 @@ export const options = {
       executor: "per-vu-iterations",
       exec: "loginAction",
       // 'vus' specifies the number of virtual users to simulate.
-      vus: 1,
+      vus: 3,
       // 'iterations' defines how many times each virtual user will execute the function.
       iterations: 1,
       // 'startTime' sets when the scenario should start relative to the test start.
@@ -109,22 +109,26 @@ export async function loginAction() {
     await page.screenshot({
       path: `output/screenshots/remember-me-${date}.png`,
     });
-    const loginButton = await page.locator(commonConfig.LOGIN_BUTTON.locator);
+    const loginButton = await page.locator(
+      `xpath=${commonConfig.LOGIN_BUTTON.locator}`
+    );
     await Promise.all([page.waitForNavigation(), loginButton.click()]);
     // await page.waitForNavigation();
     await page.screenshot({
       path: `output/screenshots/home-${date}.png`,
     });
 
-    const targetButton = await page.locator(randomRoute.locator);
+    const targetButton = await page.locator(`xpath=${randomRoute.locator}`);
     await Promise.all([page.waitForNavigation(), targetButton.click()]);
 
-    await check(page.locator("h1"), {
-      header: async (h1) => (await h1.textContent()) === randomRoute.content,
-    });
     // await page.waitForNavigation();
     await page.screenshot({
       path: `output/screenshots/${randomRoute.name}-${date}.png`,
+    });
+
+    await check(page.locator("h1"), {
+      "Target Page Loaded": async (h1) =>
+        (await h1.textContent()) === randomRoute.content,
     });
 
     // wait for 5 seconds to be friendly to the server
