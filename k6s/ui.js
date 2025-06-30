@@ -121,6 +121,7 @@ export async function loginAction() {
     const targetButton = await page.locator(`xpath=${randomRoute.locator}`);
     await Promise.all([page.waitForNavigation(), targetButton.click()]);
 
+    await page.waitForLoadState("load");
     // await page.waitForNavigation();
     await page.screenshot({
       path: `output/screenshots/${randomRoute.name}-${date}.png`,
