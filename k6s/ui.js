@@ -1,8 +1,11 @@
 import { browser } from "k6/browser";
-import { check, sleep } from "k6";
-import { SharedArray, SharedObject } from "k6/data";
+// import { check, sleep } from "k6";
+import { sleep } from "k6";
+import { SharedArray } from "k6/data";
 import http from "k6/http";
 import { randomItem } from "https://jslib.k6.io/k6-utils/1.2.0/index.js";
+import { check } from "https://jslib.k6.io/k6-utils/1.5.0/index.js";
+import ws from "k6/ws";
 
 // To avoid loading file for each VU as it cna cause performance issues.
 // Using shared array to load the file once and share it with all VUs.
@@ -55,6 +58,17 @@ export const options = {
     reachable: {
       executor: "constant-vus",
       exec: "siteReachable",
+      vus: 10,
+      duration: "10s",
+      options: {
+        browser: {
+          type: "chromium",
+        },
+      },
+    },
+    websocket: {
+      executor: "constant-vus",
+      exec: "webSocketWorking",
       vus: 10,
       duration: "10s",
       options: {
@@ -149,5 +163,24 @@ export function siteReachable() {
     "status is 200": (r) => r.status === 200,
     // 2000 ms = 2s
     "duration was <= 2s": (r) => r.timings.duration <= 2000,
+  });
+}
+
+export function webSocketWorking() {
+  const url = "ws://echo.websocket.org";
+  const params = {
+    tags: {
+      page: "websocket",
+    },
+  };
+
+  const res = ws.connect(url, params, function (socket) {
+    socket.on("open", () => console.log("Connected to websocket"));
+    socket.on("message", (data) => console.log("Received message:", data));
+    socket.on("close", () => console.log("Disconnected"));
+  });
+
+  check(res, {
+    "status is 101": (r) => r && r.status === 101,
   });
 }

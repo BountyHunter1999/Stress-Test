@@ -1,5 +1,12 @@
 # K6s
 
+## Key Terms:
+
+1. VU: Virtual User
+2. Iterations: The number of times the test will be executed by a VU
+3. VU Iteration: A single execution of the test by a VU
+4. Shared Iteration: A single execution of the test by all VUs
+
 ## Understand Output
 
 ```bash
