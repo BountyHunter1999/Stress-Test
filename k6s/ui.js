@@ -167,7 +167,7 @@ export function siteReachable() {
 }
 
 export function webSocketWorking() {
-  const url = "ws://echo.websocket.org";
+  const url = "wss://echo.websocket.org";
   const params = {
     tags: {
       page: "websocket",
@@ -178,8 +178,16 @@ export function webSocketWorking() {
     socket.on("open", () => console.log("Connected to websocket"));
     socket.on("message", (data) => console.log("Received message:", data));
     socket.on("close", () => console.log("Disconnected"));
+
+    socket.on("ping", () => console.log("PING!"));
+
+    socket.setTimeout(function () {
+      console.log("Closing the socket, 2 seconds passed");
+      socket.close();
+    }, 2000);
   });
 
+  // console.log(res);
   check(res, {
     "status is 101": (r) => r && r.status === 101,
   });

@@ -14,3 +14,6 @@ dashboard:
 
 dirs:
 	mkdir -p output/{report,screenshots}
+
+clean_reports:
+	rm -f output/report/*.html output/screenshots/*.png
