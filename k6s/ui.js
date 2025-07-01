@@ -180,6 +180,11 @@ export function webSocketWorking() {
     socket.on("close", () => console.log("Disconnected"));
 
     socket.on("ping", () => console.log("PING!"));
+    socket.on("error", (e) => {
+      if (e.error() != "websocket: close sent") {
+        console.log("An unexpected error occurred: ", e.error());
+      }
+    });
 
     socket.setTimeout(function () {
       console.log("Closing the socket, 2 seconds passed");
