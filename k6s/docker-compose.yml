@@ -17,3 +17,4 @@ services:
       # Open web dashboard in default browser
       - K6_WEB_DASHBOARD_OPEN=true
       - DISPLAY=$DISPLAY
+      - HOST=${HOST}
