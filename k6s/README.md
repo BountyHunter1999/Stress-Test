@@ -103,3 +103,23 @@ make stress
 ### Start web socket server
 
 - `websocat -s 1234` Start listening on `ws://127.0.0.1:1234` and dumping all incoming websocket messages to console.
+
+## Installation
+
+### On MAC
+
+1. `brew install k6`
+2. `brew install chromium --no-quarantine` Just doing this, we get damaged error
+3. `xattr -cr /Applications/Chromium.app`
+
+### On Linux
+
+```bash
+sudo gpg -k
+sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+sudo apt-get update
+sudo apt-get install k6
+```
+
+- Or just run `make see_browser`
