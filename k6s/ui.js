@@ -81,6 +81,7 @@ export const options = {
   // consider it fail
   thresholds: {
     http_req_duration: ["p(90)<2000", "p(95)<1500"],
+    check: ["rate == 1"],
     // request with tag "page:login"
     // "http_req_duration{page:login}": [
     //   {
