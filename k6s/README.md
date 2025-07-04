@@ -31,19 +31,23 @@
 - `checks_failed`: Percentage of checks that failed.
 
 - `HTTP`
+
   - `http_req_duration`: HTTP request duration statistics including average, min, median, max, and percentiles.
 
 - `Execution`
+
   - `iteration_duration`: Duration statistics of each test iteration.
   - `iterations`: Number of iterations executed per second.
   - `vus`: Virtual Users (VUs) statistics, including min and max values.
   - `vus_max`: Maximum number of Virtual Users configured.
 
 - `Network`
+
   - `data_received`: Total amount of data received.
   - `data_sent`: Total amount of data sent.
 
 - `Browser`
+
   - `browser_data_received`: Data received by the browser during testing.
   - `browser_data_sent`: Data sent by the browser during testing.
   - `browser_http_req_duration`: HTTP request duration statistics from the browser's perspective.
@@ -90,3 +94,12 @@ make stress
 
 - `ramping-vus`:
   A number of VUs will start at the beginning and ramp up to the specified number of VUs over the specified duration.
+
+## Websocket
+
+- `cargo install websocat`
+- `websocat wss://ws.k6.io`
+
+### Start web socket server
+
+- `websocat -s 1234` Start listening on `ws://127.0.0.1:1234` and dumping all incoming websocket messages to console.
